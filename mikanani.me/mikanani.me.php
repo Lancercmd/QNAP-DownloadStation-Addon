@@ -1,6 +1,7 @@
 <?php
 class mikananime implements ISite, IRss, ISearch, IVerify, IDownload, IPostProcess {
     const SITE = "https://mikanani.me";
+    private $url;
 
     /*
      * mikananime()
@@ -10,6 +11,7 @@ class mikananime implements ISite, IRss, ISearch, IVerify, IDownload, IPostProce
      * @param {string} $meta
      */
     public function __construct($url = null, $username = null, $password = null, $meta = NULL) {
+        $this->url = $url;
     }
 
     /*
@@ -17,6 +19,33 @@ class mikananime implements ISite, IRss, ISearch, IVerify, IDownload, IPostProce
      * @return {array} RssFeed array
      */
     public function ReadRss() {
+        $url = $this->url;
+
+        // 仅支持来自 mikanani.me 的 RSS
+        if (strpos($url, mikananime::SITE) === false) {
+            return array();
+        }
+        $rss = array();
+
+        // 加载页面
+        $file_contents = mikananime::CurlGet($url);
+
+        // 使用 XPath 定位
+        $dom = new DOMDocument();
+        @$dom->loadHTML($file_contents, LIBXML_NOERROR | LIBXML_NOWARNING);
+        $xpath = new DOMXPath($dom);
+        $query = $xpath->query('//item');
+
+        // 依次提取搜索结果
+        foreach ($query as $node) {
+            $feed = new RssFeed();
+            $feed->link = $node->getElementsByTagName("link")->item(0)->nodeValue;
+            $feed->title = $node->getElementsByTagName("title")->item(0)->nodeValue;
+
+            $rss[] = $feed;
+        }
+
+        return $rss;
     }
 
     static function CurlGet($url) {

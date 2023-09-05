@@ -10,6 +10,7 @@
     "domain": "mikanani.me",
     "version": 0,
     "interface": [
+        "IRss",
         "ISearch"
     ],
     "qpkg_dependencies": {
