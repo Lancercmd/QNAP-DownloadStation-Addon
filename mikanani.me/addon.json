@@ -1,0 +1,44 @@
+{
+    "author": "Lancercmd",
+    "website": "https://github.com/Lancercmd",
+    "name": "蜜柑计划 - Mikan Project",
+    "addon": "mikanani.me.php",
+    "class": "mikananime",
+    "hosts": [
+        "mikanani.me"
+    ],
+    "domain": "mikanani.me",
+    "version": 0,
+    "interface": [
+        "ISearch"
+    ],
+    "qpkg_dependencies": {
+        "DownloadStation": "5.0.0"
+    },
+    "description": {
+        "CZE": "",
+        "DAN": "",
+        "DUT": "",
+        "ENG": "",
+        "ESM": "",
+        "FIN": "",
+        "FRE": "",
+        "GER": "",
+        "GRK": "",
+        "HUN": "",
+        "ITA": "",
+        "JPN": "",
+        "KOR": "",
+        "NOR": "",
+        "POL": "",
+        "POR": "",
+        "ROM": "",
+        "RUS": "",
+        "SCH": "蜜柑计划：新一代的动漫下载站",
+        "SPA": "",
+        "SWE": "",
+        "TCH": "",
+        "THA": "",
+        "TUR": ""
+    }
+}
